@@ -35,17 +35,42 @@ namespace ExerciceDeLinq
             //    Console.WriteLine($"{stu.NomComplet} - {stu.Student_ID} - {stu.BirthDate}");
             //}
             #endregion
-
             #region Exos2.3
             //IEnumerable<string> result = dc.Students.Select(student => $"{student.First_Name} | {student.Last_Name} | {student.Student_ID} | {student.BirthDate} | {student.Login} | {student.Section_ID} | {student.Year_Result} | {student.Course_ID}");
 
-            IEnumerable<string> result = from stud in dc.Students
-                                         select $"{stud.First_Name} | {stud.Last_Name} | {stud.Student_ID} | {stud.BirthDate} | {stud.Login} | {stud.Section_ID} | {stud.Year_Result} | {stud.Course_ID}";
+            //IEnumerable<string> result = from stud in dc.Students
+            //                             select $"{stud.First_Name} | {stud.Last_Name} | {stud.Student_ID} | {stud.BirthDate} | {stud.Login} | {stud.Section_ID} | {stud.Year_Result} | {stud.Course_ID}";
 
-            foreach (string stu in result)
+            //foreach (string stu in result)
+            //{
+            //    Console.WriteLine(stu);
+            //}
+            #endregion
+
+            #region Exos3.1
+
+            //var result = dc.Students
+            //    .Where(stud => stud.BirthDate.Year < 1955)
+            //    .Select(stud => new { 
+            //        stud.Last_Name,
+            //        stud.Year_Result,
+            //        Status = (stud.Year_Result >=12 )?"Ok":"KO"
+            //    });
+
+            var result = from stud in dc.Students
+                         where stud.BirthDate.Year < 1955
+                         select new
+                         {
+                             stud.Last_Name,
+                             stud.Year_Result,
+                             Status = (stud.Year_Result >= 12) ? "Ok" : "KO"
+                         };
+
+            foreach (var student in result)
             {
-                Console.WriteLine(stu);
+                Console.WriteLine($"{student.Last_Name} {student.Year_Result} {student.Status}");
             }
+
             #endregion
             #region Console.ReadLine()
             Console.ReadLine();
