@@ -72,20 +72,39 @@ namespace ExerciceDeLinq
             //}
 
             #endregion
-            #region Exos 3.4
+            #region Exos3.4
             //var result = dc.Students
             //    .Where(s => s.Year_Result <= 3)
             //    .Select(s => new { s.Last_Name, s.Year_Result })
             //    .OrderByDescending(s => s.Year_Result);
 
+            //var result = from s in dc.Students
+            //             where s.Year_Result <= 3
+            //             orderby s.Year_Result descending
+            //             select new { s.Last_Name, s.Year_Result };
+
+            //foreach (var stud in result)
+            //{
+            //    Console.WriteLine($"{stud.Last_Name} {stud.Year_Result}");
+            //}
+            #endregion
+            #region Exos3.6
+            //var result =dc.Students
+            //    .Where(s => s.Section_ID == 1010 || s.Section_ID == 1020)
+            //    .Where(s => s.Year_Result < 12 || s.Year_Result > 18)
+            //    //.Where(s => !(s.Year_Result >= 12 && s.Year_Result <= 18))
+            //    .Select(s => new { s.Last_Name, s.Section_ID, s.Year_Result })
+            //    .OrderBy(s => s.Section_ID);
+
             var result = from s in dc.Students
-                         where s.Year_Result <= 3
-                         orderby s.Year_Result descending
-                         select new { s.Last_Name, s.Year_Result };
+                         where s.Section_ID == 1010 || s.Section_ID == 1020
+                         where s.Year_Result < 12 || s.Year_Result > 18
+                         orderby s.Section_ID
+                         select new { s.Last_Name, s.Section_ID, s.Year_Result };
 
             foreach (var stud in result)
             {
-                Console.WriteLine($"{stud.Last_Name} {stud.Year_Result}");
+                Console.WriteLine($"{stud.Last_Name} {stud.Section_ID} {stud.Year_Result}");
             }
             #endregion
             #region Console.ReadLine()
