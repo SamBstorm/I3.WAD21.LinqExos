@@ -57,20 +57,36 @@ namespace ExerciceDeLinq
             //        Status = (stud.Year_Result >=12 )?"Ok":"KO"
             //    });
 
-            var result = from stud in dc.Students
-                         where stud.BirthDate.Year < 1955
-                         select new
-                         {
-                             stud.Last_Name,
-                             stud.Year_Result,
-                             Status = (stud.Year_Result >= 12) ? "Ok" : "KO"
-                         };
+            //var result = from stud in dc.Students
+            //             where stud.BirthDate.Year < 1955
+            //             select new
+            //             {
+            //                 stud.Last_Name,
+            //                 stud.Year_Result,
+            //                 Status = (stud.Year_Result >= 12) ? "Ok" : "KO"
+            //             };
 
-            foreach (var student in result)
+            //foreach (var student in result)
+            //{
+            //    Console.WriteLine($"{student.Last_Name} {student.Year_Result} {student.Status}");
+            //}
+
+            #endregion
+            #region Exos 3.4
+            //var result = dc.Students
+            //    .Where(s => s.Year_Result <= 3)
+            //    .Select(s => new { s.Last_Name, s.Year_Result })
+            //    .OrderByDescending(s => s.Year_Result);
+
+            var result = from s in dc.Students
+                         where s.Year_Result <= 3
+                         orderby s.Year_Result descending
+                         select new { s.Last_Name, s.Year_Result };
+
+            foreach (var stud in result)
             {
-                Console.WriteLine($"{student.Last_Name} {student.Year_Result} {student.Status}");
+                Console.WriteLine($"{stud.Last_Name} {stud.Year_Result}");
             }
-
             #endregion
             #region Console.ReadLine()
             Console.ReadLine();
